@@ -7,7 +7,7 @@ Code with some major performance issues for the profiling/performance lab
 
 In this lab we'll use VisualVM - https://visualvm.java.net/, a Java profiling tool, to analyze performance issues in a Java program that creates and processes large numbers of randomly generated trees.
 
-This lab will be all "in-class"; there won't be anything to turn in, but these concepts and tools could come up on the final. The lab write-up leads you to the answer to a significant degree, so you could just race through and, "figure out who dunnit", and not really learn a lot. I'd encourage you instead to *stop at each of the questions below and put some significant thought into them*. You'll learn a lot more and get a lot more out of the experience if you try to solve a lot of these problems yourself instead of just jumping ahead to my "answer". You might also discover some cool different way to think about the problem that I hadn't thought of.
+This lab will be all "in-class"; there won't be anything to turn in, but these concepts and tools are important. The lab write-up leads you to the answer to a significant degree, so you could just race through and, "figure out who dunnit", and not really learn a lot. I'd encourage you instead to *stop at each of the questions below and put some significant thought into them*. You'll learn a lot more and get a lot more out of the experience if you try to solve a lot of these problems yourself instead of just jumping ahead to my "answer". You might also discover some cool different way to think about the problem that I hadn't thought of.
 
 ## Install the visualvm plug-in for Eclipse
 
@@ -38,11 +38,11 @@ Now go through the following steps:
 
 ## Get the code
 
-Start by forking the code from this Github repo to wherever you're going to work on this. You don't need to commit anything back since we're not actually turning stuff in, but you might find it helpful if you want to be able to track the changes you make during the day, or come back to this later.
+You will use the code in your repository. You don't need to commit anything back since we're not actually turning stuff in, but you might find it helpful if you want to be able to track the changes you make during the day, or come back to this later.
 
 ## An overview of the code
 
-The ideas behind this code and the lab come from a real-world performance problem some students and I ran into while doing some genetic programming research a few years ago, but I've stripped things down so we really just have the bits of the code that matter for the lab. Look around a little, probably starting with `Main.java`. The key thing that happens here is that we construct a large number of randomly generated trees that represent simple arithmetic expressions. Leaves are small integers, and non-leaves (internal nodes) are operators (one of +, -, *, or /). After we construct those trees, we compute the size of them all, printing timing and memory usage information at important points in the process.
+The ideas behind this code and the lab come from a real-world performance problem some students and Nic ran into while doing some genetic programming research a few years ago, but He stripped things down to the bits of the code that matter for the lab. Look around a little, probably starting with `Main.java`. The key thing that happens here is that we construct a large number of randomly generated trees that represent simple arithmetic expressions. Leaves are small integers, and non-leaves (internal nodes) are operators (one of +, -, *, or /). After we construct those trees, we compute the size of them all, printing timing and memory usage information at important points in the process.
 
 Some semi-sophisticated techniques have been employed in an effort to increase flexibility (not really the issue here) and improve performance (which is what we care about). There are two places, for example, where caching has been introduced to try to avoid duplication of computation and memory. One is in `RandomTreeFactory.doBuildRandomTree()`, which is the core of the algorithm that generates random trees. Here, after we've constructed a random (sub)tree, we look in the cache to see if we've already generated that tree. If we have, then we return the _old_ copy (the one we found in the cache) instead of the newly generated one. This ensures that if we end up generating a fragment like "5 + 3" several dozen times, there will actually only be one copy of it in memory, and every use of it will point to that copy.
 

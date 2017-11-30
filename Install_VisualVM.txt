@@ -1,0 +1,8 @@
+https://visualvm.java.net/eclipse-launcher.html
+Unzip folder
+Open eclipse Help menu
+Install new Software
+Add
+Find unzipped folder
+Wait for it to install
+Run with VisualVM

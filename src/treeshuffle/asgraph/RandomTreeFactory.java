@@ -5,10 +5,10 @@ import java.util.Map;
 import java.util.Random;
 
 public class RandomTreeFactory {
-	
+
 	private static final boolean USE_CACHE = true;
 	private Map<Tree, Tree> trees = new HashMap<Tree, Tree>();
-	
+
 	private static final double LEAF_PROBABILITY = 0.1;
 	private static final int MAX_DEPTH = 8;
 	private Random rand = new Random();
@@ -33,7 +33,7 @@ public class RandomTreeFactory {
 		if (USE_CACHE) {
 			/*
 			 * The following four lines cache constructed (sub)trees so that
-			 * there are never two different copies in memory of the same 
+			 * there are never two different copies in memory of the same
 			 * tree, i.e., two trees in member with the same nodes.
 			 */
 			if (trees.get(result) == null) {
